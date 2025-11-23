@@ -1,0 +1,172 @@
+.montserrat-400 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-700 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.bebas-neue-100 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 100 !important;
+  font-style: normal;
+  line-height: 0.9;
+}
+
+.bebas-neue-400 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 0.9;
+}
+
+.bebas-neue-700 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 0.9;
+}
+
+.texto-laranja {
+    color: #ff6101;
+    font-size: 90px;
+}
+
+.texto-branco {
+    color: #FFF;
+    font-size: 90px;
+}
+
+.itens-estrutura {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    height: 350px;
+}
+
+.equipamentos-alto-padrao {
+    background-image: url('../public/images/equipamentos_alto_padrao.png');
+}
+
+.musculacao-e-cardio {
+    background-image: url('../public/images/musculacao_e_cardio.png');
+}
+
+.itens-estrutura-texto {
+     font-size: 20px;
+     padding: 20px;
+     background-color: rgba(0, 0, 0, 0.5);
+     backdrop-filter: blur(10px);
+     border-radius: 20px;
+}
+
+.bloco {
+    background: #171a1b;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    height: 170px;
+}
+
+.bloco-texto {
+    font-size: 16px;
+    padding: 20px;
+    width: 100%;
+    background-color: #2a2f31;
+    border-radius: 20px;
+}
+
+.box-slider {
+    padding: 5em;
+}
+
+.box-franquia {
+    padding: 10em;
+}
+
+.slider {
+    height: 30em;
+    background: #CCC;
+    border-radius: 20px;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.slider-button {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.fitdance-zumba-ritbox {
+    background-image: url('../public/images/fitdance-zumba-ritbox.png');
+}
+
+.spinning-rpm {
+    background-image: url('../public/images/spinning-rpm.png');
+}
+
+.step-gap-jump {
+    background-image: url('../public/images/step-gap-jump.png');
+}
+
+.funcional-ritbox-step {
+    background-image: url('../public/images/funcional-ritbox-step.png');
+}
+
+.pilates-e-artes-marciais {
+    background-image: url('../public/images/pilates-e-artes-marciais.png');
+}
+
+.slick-slide .slider {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.slick-slide .slider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.slick-center .slider::after {
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0px);
+}
+
+/** mobile **/
+@media screen and (max-width: 768px) {
+    .box-slider {
+        padding: 1em;
+    }
+
+    .box-franquia {
+        padding: 2em;
+    }
+
+    .texto-laranja {
+        font-size: 70px;
+    }
+
+    .texto-branco {
+        font-size: 70px;
+    }
+}
