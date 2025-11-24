@@ -14,7 +14,6 @@
 
 .bebas-neue-100 {
   font-family: "Bebas Neue", sans-serif;
-  font-weight: 100 !important;
   font-style: normal;
   line-height: 0.9;
 }
@@ -43,6 +42,19 @@
     font-size: 90px;
 }
 
+.pisca {
+    animation: blink-color 1s infinite alternate;
+    font-size: 40px;
+    padding: 20px;
+    border: none;
+    width: 100%;
+}
+
+@keyframes blink-color {
+  from { background-color: #ff6101; }
+  to { background-color: #f3a81e; }
+}
+
 .itens-estrutura {
     background-size: cover;
     background-position: center;
@@ -63,11 +75,11 @@
 }
 
 .itens-estrutura-texto {
-     font-size: 20px;
-     padding: 20px;
-     background-color: rgba(0, 0, 0, 0.5);
-     backdrop-filter: blur(10px);
-     border-radius: 20px;
+    font-size: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
 }
 
 .bloco {
@@ -80,11 +92,12 @@
 }
 
 .bloco-texto {
-    font-size: 16px;
+    font-size: 23px;
     padding: 20px;
     width: 100%;
     background-color: #2a2f31;
-    border-radius: 20px;
+    border-radius: 0px 0px 20px 20px;
+    min-height: 4em;
 }
 
 .box-slider {
@@ -168,5 +181,13 @@
 
     .texto-branco {
         font-size: 70px;
+    }
+
+    .bloco-texto {
+        font-size: 20px;
+    }
+
+    .slider {
+        height: 25em;
     }
 }

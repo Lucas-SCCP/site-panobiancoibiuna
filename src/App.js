@@ -105,33 +105,40 @@ function App() {
                 <Row>
                   <Col xs={6} lg={6} className='g-2'>
                     <div className='bloco'>
-                      <div className='bebas-neue-400 bloco-texto' style={{ fontSize: '23px' }}>
+                      <div className='bebas-neue-400 bloco-texto'>
                         ARMÁRIOS ROTATIVOS
                       </div>
                     </div>
                   </Col>
                   <Col xs={6} lg={6} className='g-2'>
                     <div className='bloco'>
-                      <div className='bebas-neue-400 bloco-texto' style={{ fontSize: '23px' }}>
+                      <div className='bebas-neue-400 bloco-texto'>
                         DUCHAS AQUECIDAS
                       </div>
                     </div>
                   </Col>
                   <Col xs={6} lg={6} className='g-2'>
                     <div className='bloco'>
-                      <div className='bebas-neue-400 bloco-texto' style={{ fontSize: '23px' }}>
+                      <div className='bebas-neue-400 bloco-texto'>
                         AR-CONDICIONADO CLIMATIZADORES
                       </div>
                     </div>
                   </Col>
                   <Col xs={6} lg={6} className='g-2'>
                     <div className='bloco'>
-                      <div className='bebas-neue-400 bloco-texto' style={{ fontSize: '23px' }}>
+                      <div className='bebas-neue-400 bloco-texto'>
                         ESTACIONAMENTO
                       </div>
                     </div>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={{ span: 6, offset: 3 }}>
+                <Button className='bebas-neue-400 mt-5 pisca' href="#formulario">
+                  QUERO FAZER PARTE DO GRUPO VIP!
+                </Button>
               </Col>
             </Row>
           </Container>
@@ -203,19 +210,26 @@ function App() {
                   </SliderSlick>
                   <div style={{ textAlign: "center" }}>
                     <Row>
-                      <Col lg={{ span: 2, offset: 4 }} className='slider-button'>
-                        <div className="button" onClick={previous}>
+                      <Col xs={6} lg={{ span: 2, offset: 4 }} className='g-2'>
+                        <div className="slider-button button" onClick={previous}>
                           <GoArrowLeft fontSize={30} />
                         </div>
                       </Col>
-                      <Col lg={2} className='slider-button'>
-                        <div className="button" onClick={next}>
+                      <Col xs={6} lg={2} className='g-2'>
+                        <div className="slider-button button" onClick={next}>
                           <GoArrowRight fontSize={30} />
                         </div>
                       </Col>
                     </Row>
                   </div>
                 </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={{ span: 6, offset: 3 }}>
+                <Button className='bebas-neue-400 mt-5 mb-5 pisca' href="#formulario">
+                  QUERO FAZER PARTE DO GRUPO VIP!
+                </Button>
               </Col>
             </Row>
           </Container>
@@ -249,22 +263,25 @@ function App() {
         <Col lg={12} style={{ backgroundColor: '#000', padding: '50px', color: 'white' }}>
           <Container>
             <Row>
-              <Col lg={6} style={{ fontSize: '80px', textAlign: 'center' }} className='bebas-neue-400'>
-                <div>
+              <Col lg={6} className='mt-5' style={{ textAlign: 'center' }}>
+                <div className='bebas-neue-400' style={{ fontSize: '80px' }}>
                   Ainda
                 </div>
-                <div>
+                <div className='bebas-neue-400' style={{ fontSize: '80px' }}>
                   não está
                 </div>
-                <div style={{ color: '#ff6101'}}>
+                <div className='bebas-neue-400' style={{ color: '#ff6101', fontSize: '80px' }}>
                   no nosso
                 </div>
-                <div style={{ color: '#ff6101'}}>
+                <div className='bebas-neue-400' style={{ color: '#ff6101', fontSize: '80px' }}>
                   grupo VIP?
                 </div>
               </Col>
               <Col lg={6}>
-                <Form>
+                <div className='montserrat-400 mb-5 text-center mt-5' style={{ fontSize: '30px' }}>
+                  Cadastre-se para receber o link do grupo VIP!
+                </div>
+                <Form id="formulario">
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Nome</Form.Label>
                     <Form.Control type="text" placeholder="Digite o seu nome" />
@@ -277,7 +294,7 @@ function App() {
                     <Form.Label>Telefone</Form.Label>
                     <Form.Control type="text" placeholder="Digite o seu telefone" />
                   </Form.Group>
-                  <Button style={{ backgroundColor: '#ff6101', border: 'none', padding: '10px 20px', width: '100%' }}>
+                  <Button className='bebas-neue-400 mt-3' style={{ fontSize: '24px', padding: '20px', backgroundColor: '#ff6101', border: 'none', width: '100%' }}>
                     QUERO FAZER PARTE DO GRUPO VIP!
                   </Button>
                 </Form>
