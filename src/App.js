@@ -123,7 +123,7 @@ function App() {
       'senderName': 'Site Panobianco Ibiúna',
       'sender': 'contato@nois.dev.br',
       'recipientName': 'Panobianco Ibiúna',
-      'recipient': 'lucas.2601@gmail.com',
+      'recipient': 'panobiancoibiuna@outlook.com',
       'title': 'Nova inscrição via site',
       'message': message
     }
