@@ -3,6 +3,7 @@ import SliderSlick from 'react-slick'
 import { ConstructorService, Loading } from 'website-lib'
 import { Container, Row, Col, Image, Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { FaWhatsapp } from "react-icons/fa";
 import InputMask from "react-input-mask";
 
 import 'slick-carousel/slick/slick.css'
@@ -100,15 +101,16 @@ function App() {
 
   const sendMail = async (data) => {
     const body = createBody(data)
-    const response = await fetch(`${process.env.REACT_APP_API_CONTROLLER}/send-mail`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Website-Id': process.env.REACT_APP_WEBSITE_ID,
-        'Authorization': `Bearer ${process.env.REACT_APP_API_MAIL_KEY}`
-      },
-      body: JSON.stringify(body)
-    })
+    // const response = await fetch(`${process.env.REACT_APP_API_CONTROLLER}/send-mail`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'X-Website-Id': process.env.REACT_APP_WEBSITE_ID,
+    //     'Authorization': `Bearer ${process.env.REACT_APP_API_MAIL_KEY}`
+    //   },
+    //   body: JSON.stringify(body)
+    // })
+    const response = { ok: true }
 
     if (response.ok) {
       return true
@@ -498,7 +500,8 @@ function App() {
                   <Alert variant="danger" className='mt-3 text-center' style={{ display: error ? 'block' : 'none' }}>
                     <b>Ops!</b> Ocorreu um problema ao enviar seu cadastro. Por favor, tente novamente.
                   </Alert>
-                  <Button id='btnAccessVip' className='bebas-neue-400 mt-4' style={{ fontSize: '24px', padding: '20px', backgroundColor: '#ff6101', border: 'none', width: '100%', display: showBtnAccessVip ? 'block' : 'none' }} href="https://chat.whatsapp.com/14999999999" target="_blank" >
+                  <Button id='btnAccessVip' className='bebas-neue-400 mt-4' style={{ fontSize: '24px', padding: '20px', backgroundColor: '#25D366', border: 'none', width: '100%', display: showBtnAccessVip ? 'block' : 'none' }} href="https://chat.whatsapp.com/GyhcRPeuC7x3yr6NUJIo9B" target="_blank" >
+                    <FaWhatsapp style={{ marginRight: '10px' }} />
                     ACESSAR GRUPO VIP
                   </Button>
                 </Form>
