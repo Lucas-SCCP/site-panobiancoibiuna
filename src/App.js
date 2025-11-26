@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react'
 import SliderSlick from 'react-slick'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { MainLayout, PageRenderer, ConstructorService, Loading } from 'website-lib'
-import { Container, Row, Col, Image, Form, Button } from 'react-bootstrap';
+import { ConstructorService, Loading } from 'website-lib'
+import { Container, Row, Col, Image, Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import InputMask from "react-input-mask";
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -11,6 +11,123 @@ import 'slick-carousel/slick/slick-theme.css'
 function App() {
 
   const [website, setWebsite] = useState(undefined)
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [showBtnAccessVip, setShowBtnAccessVip] = useState(false);
+  const [registeredSuccessfully, setRegisteredSuccessfully] = useState(false);
+
+  const handleChange = (fn) => (e) => {
+    e.target.style.border = '';
+    fn(e);
+  }
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (loading) return
+    setLoading(true)
+
+    if (!formValidate()) {
+      setLoading(false)
+      return
+    }
+
+    setError(false)
+
+    const message = `Novo cadastro via site Panobianco Ibiúna:
+      Nome: ${name}
+      Email: ${email}
+      Celular: ${phone}
+    `
+
+    if (!await sendMail(message)) {
+      setError(true);
+      console.log('Notification sending failed')
+      return;
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    setShowBtnAccessVip(true);
+    setName('');
+    setEmail('');
+    setPhone('');
+
+    setRegisteredSuccessfully(true);      
+    setLoading(false);
+  };
+
+  const formValidate = () => {
+    if (!name || name.length < 3) {
+      const fieldName = document.getElementById('formName');
+      fieldName.focus();
+      fieldName.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fieldName.style.border = '5px solid red';
+      return false;
+    }
+
+    if (!email || !emailValidate(email)) {
+      const fieldEmail = document.getElementById('formEmail');
+      console.log('fieldEmail', fieldEmail)
+      console.log('email', email)
+      fieldEmail.focus();
+      fieldEmail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fieldEmail.style.border = '5px solid red';
+      return false;
+    }
+
+    if (!phone || !phoneValidate(phone)) {
+      const fieldPhone = document.getElementById('formPhone');
+      fieldPhone.focus();
+      fieldPhone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fieldPhone.style.border = '5px solid red';
+      return false;
+    }
+
+    return true;
+  }
+
+  const phoneValidate = (phone) => {
+    return /^\(\d{2}\) \d{5}-\d{4}$/.test(phone)
+  }
+
+  const emailValidate = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
+
+  const sendMail = async (data) => {
+    const body = createBody(data)
+    const response = await fetch(`${process.env.REACT_APP_API_CONTROLLER}/send-mail`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Website-Id': process.env.REACT_APP_WEBSITE_ID,
+        'Authorization': `Bearer ${process.env.REACT_APP_API_MAIL_KEY}`
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+      return true
+    } else {
+      setError(true);
+      return false
+    }
+  }
+
+  const createBody = (message) => {
+    return {
+      'senderName': 'Site Panobianco Ibiúna',
+      'sender': 'contato@nois.dev.br',
+      'recipientName': 'Panobianco Ibiúna',
+      'recipient': 'lucas.2601@gmail.com',
+      'title': 'Nova inscrição via site',
+      'message': message
+    }
+  }
 
   let sliderRef = useRef(null);
   const next = () => {
@@ -166,7 +283,17 @@ function App() {
                       <Row style={{ padding: '1em' }}>
                         <Col>
                           <div className='slider fitdance-zumba-ritbox'>
-                            FITDANCE, ZUMBA E RITBOX
+                            <div className='slider-texto bebas-neue-400' style={{ fontSize: '30px', color: '#FFF' }}>
+                              <div>
+                                FITDANCE,
+                              </div>
+                              <div>
+                                ZUMBA
+                              </div>
+                              <div>
+                                E RITBOX
+                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -175,7 +302,14 @@ function App() {
                       <Row style={{ padding: '1em' }}>
                         <Col>
                           <div className='slider spinning-rpm'>
-                            SPINNING, RPM
+                            <div className='slider-texto bebas-neue-400' style={{ fontSize: '30px', color: '#FFF' }}>
+                              <div>
+                                SPINNING,
+                              </div>
+                              <div>
+                                RPM
+                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -184,7 +318,14 @@ function App() {
                       <Row style={{ padding: '1em' }}>
                         <Col>
                           <div className='slider step-gap-jump'>
-                            STEP, GAP E JUMP
+                            <div className='slider-texto bebas-neue-400' style={{ fontSize: '30px', color: '#FFF' }}>
+                              <div>
+                                STEP, GAP
+                              </div>
+                              <div>
+                                E JUMP
+                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -193,7 +334,17 @@ function App() {
                       <Row style={{ padding: '1em' }}>
                         <Col>
                           <div className='slider funcional-ritbox-step'>
-                            FUNCIONAL, RITBOX E STEP
+                            <div className='slider-texto bebas-neue-400' style={{ fontSize: '30px', color: '#FFF' }}>
+                              <div>
+                                FUNCIONAL,
+                              </div>
+                              <div>
+                                RITBOX E
+                              </div>
+                              <div>
+                                STEP
+                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -202,7 +353,17 @@ function App() {
                       <Row style={{ padding: '1em' }}>
                         <Col>
                           <div className='slider pilates-e-artes-marciais'>
-                          PILATES E ARTES MARCIAIS
+                            <div className='slider-texto bebas-neue-400' style={{ fontSize: '30px', color: '#FFF' }}>
+                              <div>
+                                PILATES E
+                              </div>
+                              <div>
+                                ARTES
+                              </div>
+                              <div>
+                                MARCIAIS
+                              </div>
+                            </div>
                           </div>
                         </Col>
                       </Row>
@@ -263,7 +424,7 @@ function App() {
         <Col lg={12} style={{ backgroundColor: '#000', padding: '50px', color: 'white' }}>
           <Container>
             <Row>
-              <Col lg={6} className='mt-5' style={{ textAlign: 'center' }}>
+              <Col lg={6} className='mt-5 d-flex flex-column justify-content-center' style={{ textAlign: 'center' }}>
                 <div className='bebas-neue-400' style={{ fontSize: '80px' }}>
                   Ainda
                 </div>
@@ -278,24 +439,67 @@ function App() {
                 </div>
               </Col>
               <Col lg={6}>
-                <div className='montserrat-400 mb-5 text-center mt-5' style={{ fontSize: '30px' }}>
-                  Cadastre-se para receber o link do grupo VIP!
+                <div className='montserrat-400 mb-5 text-center mt-5'>
+                  <div style={{ fontSize: '28px' }}>
+                    Cadastre-se para receber o link do grupo VIP!
+                  </div>
+                  <div className='mt-3' style={{ fontSize: '22px' }}>
+                    Preencha seus dados no formulário abaixo, clique em cadastrar e aguarde para o botão com o link do grupo VIP aparecer.
+                  </div>
                 </div>
                 <Form id="formulario">
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                  <Form.Group className="mb-3">
                     <Form.Label>Nome</Form.Label>
-                    <Form.Control type="text" placeholder="Digite o seu nome" />
+                    <Form.Control
+                      id="formName"
+                      type="text"
+                      placeholder="Digite o seu nome"
+                      value={name}
+                      onChange={handleChange(e => setName(e.target.value))}
+                    />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                  <Form.Group className="mb-3">
                     <Form.Label>E-mail</Form.Label>
-                    <Form.Control type="email" placeholder="Digite o seu e-mail" />
+                    <Form.Control
+                      id="formEmail"
+                      type="email"
+                      placeholder="Digite o seu e-mail" 
+                      value={email}
+                      onChange={handleChange(e => setEmail(e.target.value))}
+                    />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                  <Form.Group className="mb-3">
                     <Form.Label>Telefone</Form.Label>
-                    <Form.Control type="text" placeholder="Digite o seu telefone" />
+                    <Form.Control
+                      id="formPhone"
+                      as={InputMask}
+                      mask='(99) 99999-9999'
+                      placeholder="(99) 99999-9999"
+                      value={phone}
+                      onChange={handleChange(e => setPhone(e.target.value))}
+                    />
                   </Form.Group>
-                  <Button className='bebas-neue-400 mt-3' style={{ fontSize: '24px', padding: '20px', backgroundColor: '#ff6101', border: 'none', width: '100%' }}>
-                    QUERO FAZER PARTE DO GRUPO VIP!
+                  <Button onClick={handleSubmit} disabled={loading || registeredSuccessfully} className='bebas-neue-400 mt-3' style={{ fontSize: '24px', padding: '20px', backgroundColor: '#ff6101', border: 'none', width: '100%' }}>
+                    {loading ? (
+                    <>
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />{" "}
+                      ENVIANDO... AGUARDE PARA RECEBER O LINK DO GRUPO VIP
+                    </>
+                  ) : (
+                    registeredSuccessfully ? "CADASTRO REALIZADO COM SUCESSO" : "ME CADASTRAR NO GRUPO VIP"
+                  )}
+                  </Button>
+                  <Alert variant="danger" className='mt-3 text-center' style={{ display: error ? 'block' : 'none' }}>
+                    <b>Ops!</b> Ocorreu um problema ao enviar seu cadastro. Por favor, tente novamente.
+                  </Alert>
+                  <Button id='btnAccessVip' className='bebas-neue-400 mt-4' style={{ fontSize: '24px', padding: '20px', backgroundColor: '#ff6101', border: 'none', width: '100%', display: showBtnAccessVip ? 'block' : 'none' }} href="https://chat.whatsapp.com/14999999999" target="_blank" >
+                    ACESSAR GRUPO VIP
                   </Button>
                 </Form>
               </Col>

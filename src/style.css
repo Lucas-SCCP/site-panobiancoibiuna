@@ -112,10 +112,22 @@
     height: 30em;
     background: #CCC;
     border-radius: 20px;
-    padding: 20px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+}
+
+.slider-texto {
+    font-size: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 0px 0px 20px 20px;
+    width: 100%;
+    min-height: 4em;
+    text-align: center;
 }
 
 .slider-button {
