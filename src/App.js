@@ -101,16 +101,15 @@ function App() {
 
   const sendMail = async (data) => {
     const body = createBody(data)
-    // const response = await fetch(`${process.env.REACT_APP_API_CONTROLLER}/send-mail`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-Website-Id': process.env.REACT_APP_WEBSITE_ID,
-    //     'Authorization': `Bearer ${process.env.REACT_APP_API_MAIL_KEY}`
-    //   },
-    //   body: JSON.stringify(body)
-    // })
-    const response = { ok: true }
+    const response = await fetch(`${process.env.REACT_APP_API_CONTROLLER}/send-mail`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Website-Id': process.env.REACT_APP_WEBSITE_ID,
+        'Authorization': `Bearer ${process.env.REACT_APP_API_MAIL_KEY}`
+      },
+      body: JSON.stringify(body)
+    })
 
     if (response.ok) {
       return true
